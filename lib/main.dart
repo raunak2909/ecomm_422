@@ -1,8 +1,18 @@
 import 'package:ecomm_422/core/routes/app_routes.dart';
+import 'package:ecomm_422/core/services/api_service.dart';
+import 'package:ecomm_422/features/on_boarding/presentation/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => UserBloc(apiService: APIService())),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -21,4 +31,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
