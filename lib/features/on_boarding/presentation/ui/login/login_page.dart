@@ -1,10 +1,14 @@
 
+import 'package:ecomm_422/features/on_boarding/presentation/bloc/user_event.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/ui_helper.dart';
+import '../../../../../core/widgets/app_rounded_btn.dart';
+import '../../bloc/user_bloc.dart';
+import '../../bloc/user_state.dart';
 
 class LoginPage extends StatelessWidget {
   var emailController = TextEditingController();
@@ -76,11 +80,11 @@ class LoginPage extends StatelessWidget {
                 },
               ),
               SizedBox(height: 21),
-              /*BlocConsumer<UserBloc, UserState>(
+              BlocConsumer<UserBloc, UserState>(
                 listenWhen: (prev, curr){
                   return isLogin;
                 },
-                buildWhen: (prev, curr){
+                  buildWhen: (prev, curr){
                   return isLogin;
                 },
                 listener: (_, state) {
@@ -100,7 +104,7 @@ class LoginPage extends StatelessWidget {
                     ScaffoldMessenger.of(
                       context,
                     ).showSnackBar(SnackBar(content: Text("Logged-in successfully!!"), backgroundColor: Colors.green,));
-                    Navigator.pushReplacementNamed(context, AppRoutes.dashboard);
+                    Navigator.pushReplacementNamed(context, AppRoutes.dashboard_page);
                   }
                 },
                 builder: (context, state) {
@@ -109,7 +113,7 @@ class LoginPage extends StatelessWidget {
                       if (mKey.currentState!.validate()) {
                         isLogin = true;
                         context.read<UserBloc>().add(
-                          LoginUserEvent(
+                          UserAuthenticateEvent(
                             email: emailController.text,
                             pass: passController.text,
                           ),
@@ -132,7 +136,7 @@ class LoginPage extends StatelessWidget {
                         : null,
                   );
                 },
-              ),*/
+              ),
               SizedBox(height: 11),
               Center(
                 child: InkWell(

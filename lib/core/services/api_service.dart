@@ -1,11 +1,39 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ecomm_422/core/constants/app_constants.dart';
 import 'package:ecomm_422/core/exceptions/app_exceptions.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class APIService {
-  getAPI() {}
+  getAPI({
+    required String url,
+    Map<String, String>? mHeaders,
+    bool isLoginRegister = false,
+  }) async {
+    Uri uri = Uri.parse(url);
+
+    if(!isLoginRegister){
+      mHeaders ??= {};
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String token = prefs.getString(AppConstants.prefUserToken) ?? "";
+      mHeaders["Authorization"] = "Bearer $token";
+    }
+
+
+    try {
+      var response = await http.get(
+        uri,
+        headers: mHeaders
+      );
+      return returnResponse(response);
+    } on SocketException catch (e) {
+      throw NoInternetException(msg: e.toString());
+    } catch (e) {
+      print(e);
+    }
+  }
 
   Future<dynamic> postAPI({
     required String url,

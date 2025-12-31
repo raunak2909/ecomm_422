@@ -2,6 +2,7 @@ import 'package:ecomm_422/features/on_boarding/presentation/ui/sign_up/sign_up_p
 import 'package:ecomm_422/features/on_boarding/presentation/ui/splash/splash_page.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../features/dashboard/presentation/ui/dashboard/dashboard_page.dart';
 import '../../features/on_boarding/presentation/ui/login/login_page.dart';
 
 class AppRoutes{
@@ -16,6 +17,6 @@ class AppRoutes{
     splash_page: (context) => SplashPage(),
     login_page: (context) => LoginPage(),
     sign_up_page: (context) => SignupPage(),
-    /*dashboard_page: (context) => const DashBoardPage(),*/
+    dashboard_page: (context) => DashboardPage(),
   };
 }

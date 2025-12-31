@@ -5,6 +5,7 @@ class AppUrls{
   ///signUp
   static const String sign_up_url = "$base_url/ecommerce-api/user/registration";
   ///cat
+  static const String cat_url = "$base_url/ecommerce-api/categories";
   ///product
   ///cart
   ///order

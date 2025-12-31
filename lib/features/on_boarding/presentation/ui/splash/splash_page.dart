@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:ecomm_422/core/constants/app_constants.dart';
 import 'package:ecomm_422/core/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -15,8 +17,17 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 2), (){
-      Navigator.pushNamed(context, AppRoutes.login_page);
+    Timer(Duration(seconds: 2), () async{
+
+      String nextPage = AppRoutes.login_page;
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String userToken = prefs.getString(AppConstants.prefUserToken) ?? "";
+
+      if(userToken.isNotEmpty){
+        nextPage = AppRoutes.dashboard_page;
+      }
+
+      Navigator.pushReplacementNamed(context, nextPage);
     });
   }
   
