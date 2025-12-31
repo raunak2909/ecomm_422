@@ -19,7 +19,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState>{
         var responseBody = await apiService.getAPI(url: AppUrls.cat_url);
         if(responseBody["status"]){
           print(responseBody["data"]);
-          List<Map<String, dynamic>> mCatMap = responseBody["data"];
+          List<dynamic> mCatMap = responseBody["data"];
           List<CatModel> mCatModel = [];
 
           for(Map<String, dynamic> eachMap in mCatMap){

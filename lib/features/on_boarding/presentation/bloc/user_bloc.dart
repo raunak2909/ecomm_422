@@ -16,6 +16,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       try {
         var responseBody = await apiService.postAPI(
           url: AppUrls.sign_up_url,
+          isLoginRegister: true,
           mBody: {
             "name": event.name,
             "mobile_number": event.mobNo,
@@ -42,6 +43,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       try {
         var responseBody = await apiService.postAPI(
           url: AppUrls.login_url,
+          isLoginRegister: true,
           mBody: {
             "email" : event.email,
             "password" : event.pass

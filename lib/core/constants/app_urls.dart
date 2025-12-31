@@ -7,6 +7,7 @@ class AppUrls{
   ///cat
   static const String cat_url = "$base_url/ecommerce-api/categories";
   ///product
+  static const String product_url = "$base_url/ecommerce-api/products";
   ///cart
   ///order
 }

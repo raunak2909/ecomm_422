@@ -38,13 +38,23 @@ class APIService {
   Future<dynamic> postAPI({
     required String url,
     Map<String, dynamic>? mBody,
+    Map<String, String>? mHeaders,
+    bool isLoginRegister = false,
   }) async {
     Uri uri = Uri.parse(url);
+
+    if(!isLoginRegister){
+      mHeaders ??= {};
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String token = prefs.getString(AppConstants.prefUserToken) ?? "";
+      mHeaders["Authorization"] = "Bearer $token";
+    }
 
     try {
       var response = await http.post(
         uri,
         body: mBody != null ? jsonEncode(mBody) : null,
+        headers: mHeaders
       );
       return returnResponse(response);
     } on SocketException catch (e) {
